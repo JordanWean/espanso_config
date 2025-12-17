@@ -36,8 +36,8 @@ matches:
     replace: "sudo nixos-rebuild switch --flake .#myhost"
 
   - trigger: ":nix-shell"
-    replace: nix-shell -p
+    replace: "nix-shell -p"
 
   - trigger: ":nix-home"
-    replace: home-manager switch --flake .#jordanwean
+    replace: "home-manager switch --flake .#jordanwean"
 
