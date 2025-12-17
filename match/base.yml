@@ -45,3 +45,6 @@ matches:
   - trigger: ":nix-gc"
     replace: "sudo nix-collect-garbage --delete-older-than 15d"
 
+  - trigger: ":seq-helpers"
+    replace: source("https://raw.githubusercontent.com/JordanWean/jbw_utils/refs/heads/main/seq_helpers.R")
+
