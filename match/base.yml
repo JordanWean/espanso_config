@@ -33,7 +33,7 @@ matches:
     replace: "¯\\_(ツ)_/¯"
 
   - trigger: ":nix-build"
-    replace: "sudo nixos-rebuild switch --flake .#myhost"
+    replace: "sudo nixos-rebuild switch --flake .#my-host"
 
   - trigger: ":nix-shell"
     replace: "nix-shell -p"
