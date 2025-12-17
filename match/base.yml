@@ -38,6 +38,6 @@ matches:
   - trigger: ":nix-shell"
     replace: nix-shell -p
 
-  - trigger: ":home-rebuild"
-    replace: "home-manager switch --flake"
+  - trigger: ":nix-home"
+    replace: home-manager switch --flake .#jordanwean
 
