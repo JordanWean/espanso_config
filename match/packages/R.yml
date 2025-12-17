@@ -1,0 +1,23 @@
+# quarto header
+matches:
+
+  - trigger: ":quartohead"
+    replace: |
+      ---
+      title: "Title"
+      subtitle: "Subtitle"
+      title-block-banner: true
+      date: "`r Sys.Date()`"
+      author:
+        - name: Jordan Wean
+          orcid: 0000-0002-9459-0093
+          email: weanj@med.umich.edu
+      format:
+        html:
+          toc: true
+          embed-resources: true
+          smooth-scroll: true
+          theme: journal
+          output-file: "Title"
+      monofont: 'Cascadia Code'
+      ---
