@@ -48,3 +48,6 @@ matches:
   - trigger: ":seq-helpers"
     replace: source("https://raw.githubusercontent.com/JordanWean/jbw_utils/refs/heads/main/seq_helpers.R")
 
+  - trigger: ":nix-update"
+    replace: "sudo nix flake update"
+
