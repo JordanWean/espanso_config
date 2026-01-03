@@ -41,7 +41,6 @@ matches:
   - trigger: ":nix-home"
     replace: "home-manager switch --flake .#jordanwean"
 
-
   - trigger: ":nix-gc"
     replace: "sudo nix-collect-garbage --delete-older-than 15d"
 
