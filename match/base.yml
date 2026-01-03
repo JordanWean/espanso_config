@@ -51,3 +51,16 @@ matches:
   - trigger: ":nix-update"
     replace: "sudo nix flake update"
 
+  - trigger: ":nix-gc"
+    replace: "sudo nix-collect-garbage --delete-older-than 15d"
+
+
+
+
+
+
+
+
+
+
+
