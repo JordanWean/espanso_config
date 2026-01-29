@@ -53,6 +53,10 @@ matches:
   - trigger: ":nix-gc"
     replace: "sudo nix-collect-garbage --delete-older-than 15d"
 
+  - trigger: ":linux-drives"
+    replace: "lsblk"
+
+
 
 
 
