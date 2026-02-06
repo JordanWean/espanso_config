@@ -56,6 +56,9 @@ matches:
   - trigger: ":linux-drives"
     replace: "lsblk"
 
+  - trigger: ":great-lakes"
+    replace: "ssh weanj@greatlakes.arc-ts.umich.edu "
+
 
 
 
