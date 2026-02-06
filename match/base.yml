@@ -57,7 +57,7 @@ matches:
     replace: "lsblk"
 
   - trigger: ":great-lakes"
-    replace: "ssh weanj@greatlakes.arc-ts.umich.edu "
+    replace: "ssh weanj@greatlakes.arc-ts.umich.edu"
 
 
 
