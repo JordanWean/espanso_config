@@ -59,8 +59,26 @@ matches:
   - trigger: ":great-lakes"
     replace: "ssh weanj@greatlakes.arc-ts.umich.edu"
 
+  - trigger: ":yay-uninstall"
+    replace: "yay -Rns"
 
+  - trigger: ":yay-install"
+    replace: "yay -S"
 
+  - trigger: ":yay-search"
+    replace: "yay -Ss"
+
+  - trigger: ":pacman-uninstall"
+    replace: "sudo pacman -Rns"
+
+  - trigger: ":pacman-install"
+    replace: "sudo pacman -S"
+
+  - trigger: ":pacman-search"
+    replace: "pacman -Ss"
+
+  - trigger: ":pacman-installed-packages"
+    replace: "pacman -Qs"
 
 
 
