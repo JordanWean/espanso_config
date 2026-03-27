@@ -80,6 +80,12 @@ matches:
   - trigger: ":pacman-installed-packages"
     replace: "pacman -Qs"
 
+  - trigger: ":pacman-update-all"
+    replace: "pacman -Syu"
+
+  - trigger: ":pacman-conf"
+    replace: "sudo nano /etc/pacman.conf"
+
 
 
 
