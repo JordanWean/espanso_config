@@ -19,5 +19,8 @@ matches:
           smooth-scroll: true
           theme: journal
           output-file: "Title"
-      monofont: 'Cascadia Code'
+          grid:
+            body-width: 1200px
+      monofont: Cascadia Code
+      mainfont: Roboto
       ---
