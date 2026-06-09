@@ -86,6 +86,12 @@ matches:
   - trigger: ":pacman-conf"
     replace: "sudo nano /etc/pacman.conf"
 
+  - trigger: ":slurm-queue"
+    replace: "squeue -u $USER"
+
+  - trigger: ":slurm-profile-job"
+    replace: "sacct -j JOBID --format=JobID,JobName%30,State,Elapsed,MaxRSS,ReqMem,AllocCPUS"
+
 
 
 
