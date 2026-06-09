@@ -1,25 +1,3 @@
-# espanso match file
-
-# For a complete introduction, visit the official docs at: https://espanso.org/docs/
-
-# You can use this file to define the base matches (aka snippets)
-# that will be available in every application when using espanso.
-
-# Matches are substitution rules: when you type the "trigger" string
-# it gets replaced by the "replace" string.
-
-# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
-
-matches:
-  # Simple text replacement
-  - trigger: ":espanso"
-    replace: "Hi there!"
-
-  # NOTE: espanso uses YAML to define matches, so pay attention to the indentation!
-
-  # But matches can also be dynamic:
-
-  # Print the current date
   - trigger: ":date"
     replace: "{{mydate}}"
     vars:
@@ -32,27 +10,9 @@ matches:
   - trigger: ":shrug"
     replace: "¯\\_(ツ)_/¯"
 
-  - trigger: ":nix-build"
-    replace: "sudo nixos-rebuild switch --flake .#my-host"
-
-  - trigger: ":nix-shell"
-    replace: "nix-shell -p"
-
-  - trigger: ":nix-home"
-    replace: "home-manager switch --flake .#jordanwean"
-
-  - trigger: ":nix-gc"
-    replace: "sudo nix-collect-garbage --delete-older-than 15d"
-
   - trigger: ":seq-helpers"
     replace: source("https://raw.githubusercontent.com/JordanWean/jbw_utils/refs/heads/main/seq_helpers.R")
-
-  - trigger: ":nix-update"
-    replace: "sudo nix flake update"
-
-  - trigger: ":nix-gc"
-    replace: "sudo nix-collect-garbage --delete-older-than 15d"
-
+    
   - trigger: ":linux-drives"
     replace: "lsblk"
 
