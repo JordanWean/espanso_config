@@ -1,14 +1,362 @@
- - trigger: ":shrug"
+matches:
+  # -------------------------------------------------------------------
+  # Fun / misc
+  # -------------------------------------------------------------------
+
+  - trigger: ":shrug"
     replace: "¯\\_(ツ)_/¯"
 
   - trigger: ":seq-helpers"
-    replace: source("https://raw.githubusercontent.com/JordanWean/jbw_utils/refs/heads/main/seq_helpers.R")
-    
-  - trigger: ":linux-drives"
-    replace: "lsblk"
+    replace: "source(\"https://raw.githubusercontent.com/JordanWean/jbw_utils/refs/heads/main/seq_helpers.R\")"
+
+  # -------------------------------------------------------------------
+  # SSH / Great Lakes
+  # -------------------------------------------------------------------
 
   - trigger: ":great-lakes"
     replace: "ssh weanj@greatlakes.arc-ts.umich.edu"
+
+  - trigger: ":gl"
+    replace: "ssh weanj@greatlakes.arc-ts.umich.edu"
+
+  # -------------------------------------------------------------------
+  # Linux filesystem / storage
+  # -------------------------------------------------------------------
+
+  - trigger: ":linux-drives"
+    replace: "lsblk"
+
+  - trigger: ":dfh"
+    replace: "df -h"
+
+  - trigger: ":duh"
+    replace: "du -sh * | sort -h"
+
+  - trigger: ":du-current"
+    replace: "du -sh ."
+
+  - trigger: ":du-depth1"
+    replace: "du -h --max-depth=1 . | sort -h"
+
+  - trigger: ":lslh"
+    replace: "ls -lh"
+
+  - trigger: ":lsla"
+    replace: "ls -lah"
+
+  - trigger: ":pwd"
+    replace: "pwd"
+
+  - trigger: ":tree2"
+    replace: "tree -L 2"
+
+  - trigger: ":find-large"
+    replace: "find . -type f -size +1G -exec ls -lh {} \\; | sort -k5 -h"
+
+  - trigger: ":find-h5"
+    replace: "find . -type f -name \"*.h5\""
+
+  - trigger: ":find-fastq"
+    replace: "find . -type f \\( -name \"*.fastq\" -o -name \"*.fastq.gz\" -o -name \"*.fq\" -o -name \"*.fq.gz\" \\)"
+
+  - trigger: ":count-files"
+    replace: "find . -type f | wc -l"
+
+  - trigger: ":chmodx"
+    replace: "chmod +x"
+
+  - trigger: ":mkdirp"
+    replace: "mkdir -p"
+
+  # -------------------------------------------------------------------
+  # tar / archives
+  # -------------------------------------------------------------------
+
+  - trigger: ":tar-create"
+    replace: "tar -cf archive.tar directory/"
+
+  - trigger: ":tar-create-parent"
+    replace: "tar -cf archive.tar -C /path/to/parent directory"
+
+  - trigger: ":tar-list"
+    replace: "tar -tf archive.tar | head"
+
+  - trigger: ":tar-extract"
+    replace: "tar -xf archive.tar"
+
+  - trigger: ":tar-gz-create"
+    replace: "tar -czf archive.tar.gz directory/"
+
+  - trigger: ":tar-gz-extract"
+    replace: "tar -xzf archive.tar.gz"
+
+  - trigger: ":tar-split"
+    replace: "tar -cf - directory/ | split -b 500G - archive.tar.part-"
+
+  - trigger: ":tar-split-extract"
+    replace: "cat archive.tar.part-* | tar -xf -"
+
+  # -------------------------------------------------------------------
+  # rsync / copying
+  # -------------------------------------------------------------------
+
+  - trigger: ":rsync-progress"
+    replace: "rsync -avh --partial --info=progress2 source/ destination/"
+
+  - trigger: ":rsync-dryrun"
+    replace: "rsync -avhn --partial --info=progress2 source/ destination/"
+
+  - trigger: ":rsync-copy-file"
+    replace: "rsync -avh --partial --info=progress2 source_file destination_file"
+
+  - trigger: ":cpv"
+    replace: "rsync -avh --partial --info=progress2"
+
+  # -------------------------------------------------------------------
+  # Slurm basics
+  # -------------------------------------------------------------------
+
+  - trigger: ":slurm-queue"
+    replace: "squeue -u $USER"
+
+  - trigger: ":sq"
+    replace: "squeue -u $USER"
+
+  - trigger: ":sacct-today"
+    replace: "sacct --starttime today --format=JobID,JobName%30,Partition,State,Elapsed,MaxRSS,ReqMem,AllocCPUS,ExitCode"
+
+  - trigger: ":slurm-profile-job"
+    replace: "sacct -j JOBID --format=JobID,JobName%30,Partition,State,Elapsed,MaxRSS,ReqMem,AllocCPUS,ExitCode"
+
+  - trigger: ":slurm-seff"
+    replace: "seff JOBID"
+
+  - trigger: ":slurm-cancel"
+    replace: "scancel JOBID"
+
+  - trigger: ":slurm-show-job"
+    replace: "scontrol show job JOBID"
+
+  - trigger: ":slurm-show-node"
+    replace: "scontrol show node NODE"
+
+  - trigger: ":slurm-sinfo"
+    replace: "sinfo"
+
+  - trigger: ":slurm-sinfo-gpu"
+    replace: "sinfo -p gpu,spgpu,gpu-rtx6000,gpu_mig40"
+
+  - trigger: ":slurm-tail-out"
+    replace: "tail -f logs/JOBNAME_JOBID.out"
+
+  - trigger: ":slurm-tail-err"
+    replace: "tail -f logs/JOBNAME_JOBID.err"
+
+  - trigger: ":slurm-failed-array"
+    replace: "sacct -j ARRAYJOBID --format=JobID,JobName%30,State,ExitCode,Elapsed | grep -v COMPLETED"
+
+  # -------------------------------------------------------------------
+  # Slurm Great Lakes interactive jobs
+  # -------------------------------------------------------------------
+
+  - trigger: ":gl-interactive"
+    replace: "srun --account=seeleyrj0 --partition=standard --cpus-per-task=4 --mem=16G --time=01:00:00 --pty bash"
+
+  - trigger: ":gl-gpu-interactive"
+    replace: "srun --account=seeleyrj0 --partition=spgpu --gres=gpu:1 --cpus-per-task=4 --mem=16G --time=01:00:00 --pty bash"
+
+  - trigger: ":gl-gpu-test"
+    replace: "srun --account=seeleyrj0 --partition=spgpu --gres=gpu:1 --cpus-per-task=4 --mem=16G --time=01:00:00 --pty bash"
+
+  - trigger: ":slurm-wrap-rsync"
+    replace: "sbatch --account=seeleyrj0 --partition=standard --job-name=rsync_copy --time=24:00:00 --cpus-per-task=1 --mem=4G --output=rsync_copy_%j.out --wrap='rsync -avh --partial --info=progress2 source/ destination/'"
+
+  # -------------------------------------------------------------------
+  # Slurm script templates
+  # -------------------------------------------------------------------
+
+  - trigger: ":slurm-basic"
+    replace: |
+      #!/bin/bash
+      #SBATCH --job-name=my_job
+      #SBATCH --account=seeleyrj0
+      #SBATCH --partition=standard
+      #SBATCH --time=04:00:00
+      #SBATCH --cpus-per-task=1
+      #SBATCH --mem=4G
+      #SBATCH --output=logs/%x_%j.out
+      #SBATCH --error=logs/%x_%j.err
+
+      set -euo pipefail
+
+      mkdir -p logs
+
+      echo "Job started on: $(hostname)"
+      echo "Job ID: ${SLURM_JOB_ID}"
+      echo "Start time: $(date)"
+      echo "Working directory: $(pwd)"
+
+      # Your command here
+
+      echo "End time: $(date)"
+
+  - trigger: ":slurm-gpu"
+    replace: |
+      #!/bin/bash
+      #SBATCH --job-name=gpu_job
+      #SBATCH --account=seeleyrj0
+      #SBATCH --partition=spgpu
+      #SBATCH --gres=gpu:1
+      #SBATCH --time=04:00:00
+      #SBATCH --cpus-per-task=4
+      #SBATCH --mem=64G
+      #SBATCH --output=logs/%x_%j.out
+      #SBATCH --error=logs/%x_%j.err
+
+      set -euo pipefail
+
+      mkdir -p logs
+
+      echo "Job started on: $(hostname)"
+      echo "Job ID: ${SLURM_JOB_ID}"
+      echo "Start time: $(date)"
+      echo "Working directory: $(pwd)"
+
+      nvidia-smi
+
+      # Your GPU command here
+
+      echo "End time: $(date)"
+
+  - trigger: ":slurm-array"
+    replace: |
+      #!/bin/bash
+      #SBATCH --job-name=array_job
+      #SBATCH --account=seeleyrj0
+      #SBATCH --partition=standard
+      #SBATCH --array=1-72%8
+      #SBATCH --time=04:00:00
+      #SBATCH --cpus-per-task=1
+      #SBATCH --mem=4G
+      #SBATCH --output=logs/%x_%A_%a.out
+      #SBATCH --error=logs/%x_%A_%a.err
+
+      set -euo pipefail
+
+      mkdir -p logs
+
+      echo "Array job ID: ${SLURM_ARRAY_JOB_ID}"
+      echo "Array task ID: ${SLURM_ARRAY_TASK_ID}"
+      echo "Started on: $(hostname)"
+      echo "Start time: $(date)"
+
+      # Your array command here
+
+      echo "End time: $(date)"
+
+  # -------------------------------------------------------------------
+  # GPU / CUDA
+  # -------------------------------------------------------------------
+
+  - trigger: ":gpu"
+    replace: "nvidia-smi"
+
+  - trigger: ":gpu-watch"
+    replace: "watch -n 1 nvidia-smi"
+
+  - trigger: ":torch-cuda"
+    replace: |
+      python - <<'EOF'
+      import torch
+      print("torch:", torch.__version__)
+      print("torch CUDA:", torch.version.cuda)
+      print("CUDA available:", torch.cuda.is_available())
+      print("GPU count:", torch.cuda.device_count())
+      if torch.cuda.is_available():
+          print("GPU:", torch.cuda.get_device_name(0))
+      EOF
+
+  # -------------------------------------------------------------------
+  # Python / conda
+  # -------------------------------------------------------------------
+
+  - trigger: ":py-site"
+    replace: "python -m site"
+
+  - trigger: ":py-path"
+    replace: |
+      python - <<'EOF'
+      import sys
+      for p in sys.path:
+          print(p)
+      EOF
+
+  - trigger: ":py-pip"
+    replace: "python -m pip"
+
+  - trigger: ":pip-check"
+    replace: "python -m pip check"
+
+  - trigger: ":pip-freeze"
+    replace: "python -m pip freeze > requirements.txt"
+
+  - trigger: ":conda-envs"
+    replace: "conda env list"
+
+  - trigger: ":conda-create"
+    replace: "conda create -n ENV_NAME python=3.9 pip -y"
+
+  - trigger: ":conda-activate"
+    replace: "conda activate ENV_NAME"
+
+  - trigger: ":conda-remove"
+    replace: "conda env remove -n ENV_NAME"
+
+  - trigger: ":conda-export"
+    replace: "conda env export > environment.yml"
+
+  - trigger: ":no-user-site"
+    replace: "export PYTHONNOUSERSITE=1"
+
+  - trigger: ":conda-no-user-site"
+    replace: |
+      mkdir -p "${CONDA_PREFIX}/etc/conda/activate.d"
+      mkdir -p "${CONDA_PREFIX}/etc/conda/deactivate.d"
+      echo 'export PYTHONNOUSERSITE=1' > "${CONDA_PREFIX}/etc/conda/activate.d/no_user_site.sh"
+      echo 'unset PYTHONNOUSERSITE' > "${CONDA_PREFIX}/etc/conda/deactivate.d/no_user_site.sh"
+
+  # -------------------------------------------------------------------
+  # CellBender
+  # -------------------------------------------------------------------
+
+  - trigger: ":cellbender-install"
+    replace: |
+      conda create -n cellbender python=3.9 pip -y
+      conda activate cellbender
+      export PYTHONNOUSERSITE=1
+      python -m pip install --upgrade pip setuptools wheel
+      python -m pip install --no-cache-dir -U git+https://github.com/broadinstitute/CellBender.git@4334e8966217c3591bf7c545f31ab979cdc6590d
+
+  - trigger: ":cellbender-run"
+    replace: |
+      cellbender remove-background \
+        --input raw_feature_bc_matrix.h5 \
+        --output sample_cellbender.h5 \
+        --cuda \
+        --expected-cells 10000 \
+        --total-droplets-included 30000 \
+        --learning-rate 0.0002 \
+        --learning-rate-retry-mult 0.5 \
+        --num-training-tries 5 \
+        --final-elbo-fail-fraction 0.1 \
+        --epoch-elbo-fail-fraction 0.1
+
+  - trigger: ":cellbender-help"
+    replace: "cellbender remove-background --help"
+
+  # -------------------------------------------------------------------
+  # Arch / pacman / yay
+  # -------------------------------------------------------------------
 
   - trigger: ":yay-uninstall"
     replace: "yay -Rns"
@@ -18,6 +366,9 @@
 
   - trigger: ":yay-search"
     replace: "yay -Ss"
+
+  - trigger: ":yay-update"
+    replace: "yay -Syu"
 
   - trigger: ":pacman-uninstall"
     replace: "sudo pacman -Rns"
@@ -32,22 +383,13 @@
     replace: "pacman -Qs"
 
   - trigger: ":pacman-update-all"
-    replace: "pacman -Syu"
+    replace: "sudo pacman -Syu"
 
   - trigger: ":pacman-conf"
     replace: "sudo nano /etc/pacman.conf"
 
-  - trigger: ":slurm-queue"
-    replace: "squeue -u $USER"
+  - trigger: ":pacman-orphans"
+    replace: "pacman -Qtdq"
 
-  - trigger: ":slurm-profile-job"
-    replace: "sacct -j JOBID --format=JobID,JobName%30,State,Elapsed,MaxRSS,ReqMem,AllocCPUS"
-
-
-
-
-
-
-
-
-
+  - trigger: ":pacman-remove-orphans"
+    replace: "sudo pacman -Rns $(pacman -Qtdq)"
