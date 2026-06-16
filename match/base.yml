@@ -393,3 +393,6 @@ matches:
 
   - trigger: ":pacman-remove-orphans"
     replace: "sudo pacman -Rns $(pacman -Qtdq)"
+
+  - trigger: ":ciscox"
+    replace: "env GDK_BACKEND=x11 WEBKIT_DISABLE_DMABUF_RENDERER=1 /opt/cisco/secureclient/bin/vpnui"
