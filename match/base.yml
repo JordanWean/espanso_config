@@ -396,3 +396,6 @@ matches:
 
   - trigger: ":ciscox"
     replace: "env GDK_BACKEND=x11 WEBKIT_DISABLE_DMABUF_RENDERER=1 /opt/cisco/secureclient/bin/vpnui"
+
+  - trigger: ":trello-mail"
+    replace: "inbox@app.trello.com"
